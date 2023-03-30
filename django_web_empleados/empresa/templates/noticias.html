@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias</title>
+</head>
+<body>
+    <h1>Noticias</h1>
+    <a href="{% url 'crear_noticia' %}">Crear nueva noticia</a>
+    <ul>
+        {% for noticia in noticias %}
+            <li>
+                <h2>{{ noticia.titulo }}</h2>
+                <p>{{ noticia.fecha_publicacion|date:"d/m/Y" }} - {{ noticia.autor }}</p>
+                <p>{{ noticia.contenido|truncatewords:20 }}</p>
+                <a href="{% url 'editar_noticia' noticia.pk %}">Editar</a> |
+                <a href="{% url 'eliminar_noticia' noticia.pk %}">Eliminar</a>
+            </li>
+        {% empty %}
+            <li>No hay noticias disponibles.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

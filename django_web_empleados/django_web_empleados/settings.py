@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import MySQLdb
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'empresa',
+    'django_web_empleados',
 ]
 
 MIDDLEWARE = [
@@ -74,9 +77,20 @@ WSGI_APPLICATION = 'django_web_empleados.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    # Configuración de la base de datos predeterminada
     'default': {
+        # Motor de base de datos a utilizar
+        # Para SQLite (predeterminadao):
         'ENGINE': 'django.db.backends.sqlite3',
+        # Nombre del archivo de la base de datos SQLite
         'NAME': BASE_DIR / 'db.sqlite3',
+
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'bbdd_django_empleados',
+        # 'USER': 'largolujan',
+        # 'PASSWORD': '19011988',
+        # 'HOST': 'localhost',
+        # 'PORT': '3306',
     }
 }
 
