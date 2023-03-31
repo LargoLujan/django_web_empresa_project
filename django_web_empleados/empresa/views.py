@@ -26,7 +26,7 @@ def ausencias(request):
     ausencias = Ausencia.objects.all()
 
     # Renderiza la plantilla noticias.html y pasa las noticias como contexto
-    return render(request, 'ausencias.html', {'ausencias': noticias})
+    return render(request, 'ausencias.html', {'ausencias': ausencias})
 
 
 def bajamedica(request):
@@ -34,7 +34,7 @@ def bajamedica(request):
     bajamedica= BajaMedica.objects.all()
 
     # Renderiza la plantilla noticias.html y pasa las noticias como contexto
-    return render(request, 'bajamedica.html', {'bajamedica': noticias})
+    return render(request, 'bajamedica.html', {'bajamedica': bajamedica})
 
 
 def puestovacante(request):
@@ -42,21 +42,21 @@ def puestovacante(request):
     puestovacante = PuestoVacante.objects.all()
 
     # Renderiza la plantilla noticias.html y pasa las noticias como contexto
-    return render(request, 'puestovacante.html', {'puestovacante': noticias})
+    return render(request, 'puestovacante.html', {'puestovacante': puestovacante})
 
 def oferta(request):
     # Obtén todas las noticias de la base de datos
     oferta = Oferta.objects.all()
 
     # Renderiza la plantilla noticias.html y pasa las noticias como contexto
-    return render(request, 'oferta.html', {'oferta': noticias})
+    return render(request, 'oferta.html', {'oferta': oferta})
 
 def solicitudsoporte(request):
     # Obtén todas las noticias de la base de datos
     solicitudsoporte = SolicitudSoporte.objects.all()
 
     # Renderiza la plantilla noticias.html y pasa las noticias como contexto
-    return render(request, 'solicitudsoporte.html', {'solicitudsoporte': noticias})
+    return render(request, 'solicitudsoporte.html', {'solicitudsoporte': solicitudsoporte})
 
 
 # Create your views here.
