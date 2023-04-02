@@ -1,6 +1,18 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from .models import Noticia, Ausencia, BajaMedica, PuestoVacante, Oferta, SolicitudSoporte
 
+
+class LoginForm(AuthenticationForm):
+    """
+        Formulario de inicio de sesión personalizado
+        """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Personaliza los campos del formulario de inicio de sesión
+        self.fields['username'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Nombre de usuario'})
+        self.fields['password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Contraseña'})
 
 class NoticiaForm(forms.ModelForm):
     class Meta:
@@ -24,7 +36,7 @@ class BajaMedicaForm(forms.ModelForm):
 class PuestoVacanteForm(forms.ModelForm):
     class Meta:
         model = PuestoVacante
-        fields = ['titulo', 'descripcion', 'requisitos', 'fecha_publicacion']
+        fields = ['titulo', 'requisitos',  'fecha_publicacion']
         exclude = ['fecha_publicacion']  # Excluye el campo fecha_publicacion
 
 
@@ -37,4 +49,5 @@ class OfertaForm(forms.ModelForm):
 class SolicitudSoporteForm(forms.ModelForm):
     class Meta:
         model = SolicitudSoporte
-        fields = ['empleado', 'asunto', 'descripcion', 'fecha_solicitud', 'estado']
+        fields = ['empleado', 'descripcion', 'fecha_creacion', 'estado']
+        exclude = ['fecha_creacion'] # Excluye el campo fecha_creación

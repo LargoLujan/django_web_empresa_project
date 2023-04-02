@@ -8,6 +8,16 @@
 <body>
     <h1>Noticias</h1>
     <a href="{% url 'crear_noticia' %}">Crear nueva noticia</a>
+    <br>
+    <a href="{% url 'puestovacante' %}">Puesto vacante</a>
+    <br>
+    <a href="{% url 'oferta' %}">Oferta</a>
+    <br>
+    <a href="{% url 'ausencias' %}">Ausencias</a>
+    <br>
+    <a href="{% url 'bajamedica' %}">Baja médica</a>
+    <br>
+    <a href="{% url 'solicitudsoporte' %}">Solicitud de soporte</a>
     <ul>
         {% for noticia in noticias %}
             <li>

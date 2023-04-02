@@ -1,7 +1,11 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path('',views.noticias, name='login'),
+    path('login/', auth_views.LoginView.as_view(authentication_form=AuthenticationForm), name='login'),
     path('noticias/', views.noticias, name='noticias'),
     path('noticias/crear/', views.crear_noticia, name='crear_noticia'),
     path('ausencias/', views.ausencias, name='ausencias'),
