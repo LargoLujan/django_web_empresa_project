@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Noticia, Ausencia, BajaMedica, PuestoVacante, Oferta, SolicitudSoporte
+from .models import Noticia, Ausencia, DiasLibres, PuestoVacante, Oferta, SolicitudSoporte
 
 
 class LoginForm(AuthenticationForm):
@@ -27,9 +27,9 @@ class AusenciaForm(forms.ModelForm):
         fields = ['empleado', 'fecha_inicio', 'fecha_fin', 'motivo']
 
 
-class BajaMedicaForm(forms.ModelForm):
+class DiasLibresForm(forms.ModelForm):
     class Meta:
-        model = BajaMedica
+        model = DiasLibres
         fields = ['empleado', 'fecha_inicio', 'fecha_fin', 'motivo', 'documento']
 
 

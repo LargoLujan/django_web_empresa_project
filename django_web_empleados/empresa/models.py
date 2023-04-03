@@ -18,8 +18,9 @@ class Usuario(AbstractUser):
     email = models.EmailField(unique=True)
     dni = models.CharField(max_length=10, unique=True)
     direccion = models.CharField(max_length=200)
-    fecha_nacimiento = models.DateField()
+    fecha_nacimiento = models.DateField(null=True)
     telefono = models.CharField(max_length=20)
+    cargo = models.CharField(max_length=50)
     # otros atributos
 
     def __str__(self):
@@ -53,7 +54,7 @@ class Ausencia(models.Model):
 
 
 # Modelo para representar las bajas médicas de los empleados
-class BajaMedica(models.Model):
+class DiasLibres(models.Model):
     empleado = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()

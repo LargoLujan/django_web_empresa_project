@@ -1,35 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias</title>
-</head>
-<body>
-    <h1>Noticias</h1>
-    <a href="{% url 'crear_noticia' %}">Crear nueva noticia</a>
-    <br>
-    <a href="{% url 'puestovacante' %}">Puesto vacante</a>
-    <br>
-    <a href="{% url 'oferta' %}">Oferta</a>
-    <br>
-    <a href="{% url 'ausencias' %}">Ausencias</a>
-    <br>
-    <a href="{% url 'bajamedica' %}">Baja médica</a>
-    <br>
-    <a href="{% url 'solicitudsoporte' %}">Solicitud de soporte</a>
-    <ul>
-        {% for noticia in noticias %}
-            <li>
-                <h2>{{ noticia.titulo }}</h2>
-                <p>{{ noticia.fecha_publicacion|date:"d/m/Y" }} - {{ noticia.autor }}</p>
-                <p>{{ noticia.contenido|truncatewords:20 }}</p>
-                <a href="{% url 'editar_noticia' noticia.pk %}">Editar</a> |
-                <a href="{% url 'eliminar_noticia' noticia.pk %}">Eliminar</a>
-            </li>
-        {% empty %}
-            <li>No hay noticias disponibles.</li>
-        {% endfor %}
-    </ul>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Noticias</title>
+        <style>
+            /* Estilos CSS para la barra de navegación */
+            .navbar {
+                background-color: #1c1c1e;
+                color: white;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                height: 60px;
+                padding: 0 20px;
+            }
+
+            .navbar a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                margin: 0 20px;
+            }
+
+            .navbar a:hover {
+                text-decoration: underline;
+            }
+
+            /* Estilos CSS para la tabla de noticias */
+            .container {
+                margin-top: 80px;
+                padding: 20px;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th, td {
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            th {
+                background-color: #1c1c1e;
+                color: white;
+            }
+            /* Estilos para la tabla */
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+        }
+
+        th, td {
+          padding: 8px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+        }
+
+        th {
+          background-color: #f2f2f2;
+        }
+
+        /* Estilos para los enlaces */
+        a {
+          color: #007aff;
+          text-decoration: none;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+
+        </style>
+    </head>
+    <body>
+        <div class="navbar">
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'crear_noticia' %}">Crear noticia</a>
+            <a href="{% url 'puestovacante' %}">Puesto vacante</a>
+            <a href="{% url 'oferta' %}">Oferta</a>
+            <a href="{% url 'ausencias' %}">Ausencias</a>
+            <a href="{% url 'diaslibres' %}">Dias Libres</a>
+            <a href="{% url 'solicitudsoporte' %}">Solicitud de soporte</a>
+        </div>
+
+        <div class="container">
+            <h1>Noticias</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Fecha de publicación</th>
+                        <th>Autor</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for noticia in noticias %}
+                        <tr>
+                            <td>{{ noticia.titulo }}</td>
+                            <td>{{ noticia.fecha_publicacion|date:"d/m/Y" }}</td>
+                            <td>{{ noticia.autor }}</td>
+                            <td>
+                                <a href="{% url 'editar_noticia' noticia.pk %}">Editar</a> |
+                                <a href="{% url 'eliminar_noticia' noticia.pk %}">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No hay noticias disponibles.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </body>
 </html>

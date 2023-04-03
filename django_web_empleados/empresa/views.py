@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Noticia, Ausencia, BajaMedica, PuestoVacante, Oferta, SolicitudSoporte
+from .models import Noticia, Ausencia, DiasLibres, PuestoVacante, Oferta, SolicitudSoporte
 from .forms import NoticiaForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 
@@ -54,12 +54,12 @@ def ausencias(request):
     return render(request, 'ausencias.html', {'ausencias': ausencias})
 
 
-def bajamedica(request):
+def diaslibres(request):
     # Obtén todas las noticias de la base de datos
-    bajamedica= BajaMedica.objects.all()
+    diaslibres= DiasLibres.objects.all()
 
     # Renderiza la plantilla noticias.html y pasa las noticias como contexto
-    return render(request, 'bajamedica.html', {'bajamedica': bajamedica})
+    return render(request, 'diaslibres.html', {'diaslibres': diaslibres})
 
 
 def puestovacante(request):
