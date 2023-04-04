@@ -1,7 +1,17 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import Noticia, Ausencia, DiasLibres, PuestoVacante, Oferta, SolicitudSoporte
 from .forms import NoticiaForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
+def profile(request):
+    user = request.user
+    context = {'user': user}
+    return render(request, 'profile.html', context)
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -23,28 +33,33 @@ def user_login(request):
     context = {'form': form}
     return render(request, 'login.html', context)
 
+
 def user_logout(request):
     logout(request)
     return redirect('noticias')
+
 
 def noticias(request):
     # Obtén todas las noticias de la base de datos
     noticias = Noticia.objects.all()
     context = {'noticias': noticias}
     # Renderiza la plantilla noticias.html y pasa las noticias como contexto
-    return render(request, 'noticias.html',  context)
+    return render(request, 'noticias', context)
+
 
 def crear_noticia(request):
     if request.method == 'POST':
-        form = NoticiaForm(request.POST)
+        form = NoticiaForm(request.POST, request.FILES)
         if form.is_valid():
+            form.instance.autor = request.user
             form.save()
-            return redirect('noticias')
+            return HttpResponseRedirect('noticias.html')
     else:
         form = NoticiaForm()
 
     context = {'form': form}
     return render(request, 'crear_noticia.html', context)
+
 
 def ausencias(request):
     # Obtén todas las noticias de la base de datos
@@ -56,7 +71,7 @@ def ausencias(request):
 
 def diaslibres(request):
     # Obtén todas las noticias de la base de datos
-    diaslibres= DiasLibres.objects.all()
+    diaslibres = DiasLibres.objects.all()
 
     # Renderiza la plantilla noticias.html y pasa las noticias como contexto
     return render(request, 'diaslibres.html', {'diaslibres': diaslibres})
@@ -69,6 +84,7 @@ def puestovacante(request):
     # Renderiza la plantilla noticias.html y pasa las noticias como contexto
     return render(request, 'puestovacante.html', {'puestovacante': puestovacante})
 
+
 def oferta(request):
     # Obtén todas las noticias de la base de datos
     oferta = Oferta.objects.all()
@@ -76,12 +92,12 @@ def oferta(request):
     # Renderiza la plantilla noticias.html y pasa las noticias como contexto
     return render(request, 'oferta.html', {'oferta': oferta})
 
+
 def solicitudsoporte(request):
     # Obtén todas las noticias de la base de datos
     solicitudsoporte = SolicitudSoporte.objects.all()
 
     # Renderiza la plantilla noticias.html y pasa las noticias como contexto
     return render(request, 'solicitudsoporte.html', {'solicitudsoporte': solicitudsoporte})
-
 
 # Create your views here.

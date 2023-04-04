@@ -17,7 +17,7 @@ class LoginForm(AuthenticationForm):
 class NoticiaForm(forms.ModelForm):
     class Meta:
         model = Noticia
-        fields = ['titulo', 'contenido', 'fecha_publicacion', 'autor']
+        fields = ['titulo', 'contenido', 'fecha_publicacion', 'autor', 'imagen', 'enlace']
         exclude = ['fecha_publicacion']  # Excluye el campo fecha_publicacion
 
 

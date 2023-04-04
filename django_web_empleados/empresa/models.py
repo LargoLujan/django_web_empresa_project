@@ -34,6 +34,8 @@ class Noticia(models.Model):
     contenido = models.TextField()
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
     autor = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='noticias/', blank=True, null=True)
+    enlace = models.URLField(blank=True, null=True)
 
     # Método para representación legible del objeto Noticia
     def __str__(self):
