@@ -151,4 +151,5 @@ AUTHENTICATION_BACKENDS = [
 # Modelo de usuario personalizado
 AUTH_USER_MODEL = 'empresa.Usuario'
 
+LOGIN_URL = '/login/'
 

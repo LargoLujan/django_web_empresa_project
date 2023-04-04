@@ -2,9 +2,125 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puestos vacantes</title>
+    <style>
+        /* Estilos CSS para la barra de navegación */
+        .navbar {
+            background-color: #1c1c1e;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+            padding: 0 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 20px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilos CSS para la tabla de puestos vacantes */
+        .container {
+            margin-top: 80px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        table {
+            width: 100%;
+            max-width: 600px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        td a {
+            color: #1c1c1e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        td a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #1c1c1e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        button:hover {
+            background-color: #222;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="{% url 'inicio' %}">Inicio</a>
+        <a href="{% url 'crear_noticia' %}">Crear noticia</a>
+        <a href="{% url 'puestovacante' %}">Puesto vacante</a>
+        <a href="{% url 'oferta' %}">Oferta</a>
+        <a href="{% url 'ausencias' %}">Ausencias</a>
+        <a href="{% url 'diaslibres' %}">Dias Libres</a>
+        <a href="{% url 'solicitudsoporte' %}">Solicitud de soporte</a>
+    </div>
 
+   <div class="container">
+        <h1>Puestos Vacantes</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Puesto</th>
+                    <th>Descripción</th>
+                    <th>Ubicación</th>
+                    <th>Fecha de publicación</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for puesto in puestos %}
+                <tr>
+                    <td>{{ puesto.puesto }}</td>
+                    <td>{{ puesto.descripcion }}</td>
+                    <td>{{ puesto.ubicacion }}</td>
+                    <td>{{ puesto.fecha_publicacion }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
