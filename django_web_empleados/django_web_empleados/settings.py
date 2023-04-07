@@ -34,6 +34,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_web_empleados.middleware.VerificarUsuarioMiddleware',
+    # 'django_web_empleados.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'django_web_empleados.urls'
