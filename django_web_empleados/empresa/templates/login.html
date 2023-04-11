@@ -58,27 +58,23 @@
 <body>
     <nav class="navbar">
         <div>
-            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'login' %}">Inicio</a>
             <a href="{% url 'solicitudsoporte' %}">Contacto</a>
         </div>
         <div>
-            <a href="#">Registrarse</a>
+            <a href="{% url 'registrarse' %}">Registrarse</a>
         </div>
     </nav>
     <div class="login-form">
         <h1>Login</h1>
-        {% if messages %}
-            {% for message in messages %}
-                <p>{{ message }}</p>
-            {% endfor %}
-        {% endif %}
         <form method="post">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Nombre de usuario">
-            <input type="password" name="password" placeholder="Contraseña">
+            <input type="text" name="username" placeholder="Nombre de usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
             <button type="submit">Login</button>
         </form>
     </div>
 </body>
 </html>
+
 

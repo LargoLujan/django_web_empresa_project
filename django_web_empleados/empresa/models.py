@@ -2,16 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Permission, Group
 
 
-# Modelo de usuario personalizado
-class CustomUser(AbstractUser):
-    username = models.CharField(max_length=30, unique=True)
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
-    groups = models.ManyToManyField(Group, related_name="customuser_groups")
-    user_permissions = models.ManyToManyField(Permission, related_name="customuser_user_permissions")
-
-
-# Modelo de usuario con atributos adicionales
 class Usuario(AbstractUser):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
@@ -47,7 +37,7 @@ class Ausencia(models.Model):
     motivo = models.TextField()
 
     def __str__(self):
-        return f'{self.empleado.username} - {self.fecha_inicio} - {self.fecha_fin}'
+        return f'{self.empleado.nombre} - {self.fecha_inicio} - {self.fecha_fin}'
 
 
 # Modelo de días libres

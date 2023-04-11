@@ -1,6 +1,6 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
-from .models import Noticia, Ausencia, DiasLibres, PuestoVacante, Oferta, SolicitudSoporte
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from .models import Noticia, Ausencia, DiasLibres, PuestoVacante, Oferta, SolicitudSoporte, Usuario
 
 
 class LoginForm(AuthenticationForm):
@@ -51,3 +51,9 @@ class SolicitudSoporteForm(forms.ModelForm):
         model = SolicitudSoporte
         fields = ['empleado', 'descripcion', 'fecha_creacion', 'estado']
         exclude = ['fecha_creacion'] # Excluye el campo fecha_creación
+
+
+class RegistroForm(UserCreationForm):
+    class Meta:
+        model = Usuario
+        fields=('nombre', 'apellido', 'username', 'email', 'dni', 'direccion', 'fecha_nacimiento', 'telefono', 'cargo', 'password1', 'password2')

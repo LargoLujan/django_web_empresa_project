@@ -2,9 +2,82 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse</title>
+    <style>
+        /* Estilos para la barra de navegación */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        /* Estilos para el formulario de registro */
+        .register-form {
+            margin-top: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .register-form input[type="text"],
+        .register-form input[type="password"],
+        .register-form input[type="email"] {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .register-form button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-
+    <nav class="navbar">
+        <div>
+            <a href="{% url 'login' %}">Inicio</a>
+            <a href="{% url 'solicitudsoporte' %}">Contacto</a>
+        </div>
+    </nav>
+    <div class="register-form">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.nombre.label_tag }}<input type="text" name="{{ form.nombre.name }}" placeholder="{{ form.nombre.label }}" required {{ form.nombre }}>
+            {{ form.apellido.label_tag }}<input type="text" name="{{ form.apellido.name }}" placeholder="{{ form.apellido.label }}" required {{ form.apellido }}>
+            {{ form.email.label_tag }}<input type="email" name="{{ form.email.name }}" placeholder="{{ form.email.label }}" required {{ form.email }}>
+            {{ form.dni.label_tag }}<input type="text" name="{{ form.dni.name }}" placeholder="{{ form.dni.label }}" required {{ form.dni }}>
+            {{ form.direccion.label_tag }}<input type="text" name="{{ form.direccion.name }}" placeholder="{{ form.direccion.label }}" required {{ form.direccion }}>
+            {{ form.fecha_nacimiento.label_tag }}<input type="date" name="{{ form.fecha_nacimiento.name }}" placeholder="{{ form.fecha_nacimiento.label }}" required {{ form.fecha_nacimiento }}>
+            {{ form.telefono.label_tag }}<input type="text" name="{{ form.telefono.name }}" placeholder="{{ form.telefono.label }}" required {{ form.telefono }}>
+            {{ form.cargo.label_tag }}<input type="text" name="{{ form.cargo.name }}" placeholder="{{ form.cargo.label }}" required {{ form.cargo }}>
+            {{ form.username.label_tag }}<input type="text" name="{{ form.username.name }}" placeholder="{{ form.username.label }}" required {{ form.username }}>
+            {{ form.password.label_tag }}<input type="password" name="{{ form.password.name }}" placeholder="{{ form.password.label }}" required {{ form.password }}>
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
 </body>
 </html>
